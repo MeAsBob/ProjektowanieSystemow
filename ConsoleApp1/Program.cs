@@ -30,9 +30,9 @@ class Program
         int x2 = 0;
         int y = 0;
 
-
-
-
+         
+         
+         
         double[,] MatrixA = new double[Size, Size]; // Tworzenie macierzy A
         double[,] MatrixL = new double[Size, Size]; // Tworzenie macierzy L
         double[,] MatrixU = new double[Size, Size]; // Tworzenie macierzy U

@@ -12,7 +12,7 @@ class Program
             int min = 5;//od 5
             int max = 10;//do 9
             int rand = Losowe.Next(min, max);
-            double randomValueInRange =(Convert.ToDouble(rand));
+            double randomValueInRange = (Convert.ToDouble(rand));
             return randomValueInRange;
         }
 
@@ -21,22 +21,24 @@ class Program
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();
 
-        int Size = 3; // Zmienna do testów, możesz zmienić na potrzebną wartość
+        int Size = 6; // Zmienna do testów, możesz zmienić na potrzebną wartość
         string[,] nr = new string[100, 7];
         string[,] nr2 = new string[100, 7];
+        string[,] nr3 = new string[100, 7];
         int iter = 1;
         int iter2 = 1;
+        //int iter3 = 1;
         int x = 0;
         int x2 = 0;
         int y = 0;
 
-         
-         
-         
+
+
+
         double[,] MatrixA = new double[Size, Size]; // Tworzenie macierzy A
         double[,] MatrixL = new double[Size, Size]; // Tworzenie macierzy L
         double[,] MatrixU = new double[Size, Size]; // Tworzenie macierzy U
-        
+
 
         for (int i = 0; i < Size; i++)
         {
@@ -126,7 +128,7 @@ class Program
                 }
             }
         }
-    
+
 
 
 
@@ -164,46 +166,43 @@ class Program
             Console.WriteLine();
         }
 
-        for (int i = 0; i < nr.GetLength(0); i++)
-        {
-            for (int j = 0; j < nr.GetLength(1); j++)
-            {
-                if (nr[i, j] == null)
-                {
-                    nr[i, j] = "";
-                }
-            }
-        }
-        for (int i = 0; i < nr.GetLength(0); i++)
-        {
-            for (int j = 0; j < nr.GetLength(1); j++)
-            {
-                if (nr2[i, j] == null)
-                {
-                    nr2[i, j] = "";
-                }
-            }
-        }
+
 
         x = 0;
+        x2 = 0;
         y = 0;
         for (x = 0; x != 100; x++)
         {
             for (y = 0; y != 7; y++)
             {
-                Console.Write(nr[x, y]);
-                Console.Write("|");
+                if (nr[x, y] == null)
+                {
+                    nr[x, y] = "";
+                }
+                else
+                {
+                    Console.Write(nr[x, y]);
+                    Console.Write("|");
+                }
             }
             Console.WriteLine("");
 
         }
+        y = 0;
         Console.WriteLine("-----------------------------------");
         for (x2 = 0; x2 != 100; x2++)
         {
             for (y = 0; y != 7; y++)
             {
-                Console.Write(nr2[x2, y]);
-                Console.Write("|");
+                if (nr2[x2, y] == null)
+                {
+                    nr2[x2, y] = "";
+                }
+                else
+                {
+                    Console.Write(nr2[x2, y]);
+                    Console.Write("|");
+                }
             }
             Console.WriteLine("");
         }

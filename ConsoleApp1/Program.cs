@@ -21,15 +21,22 @@ class Program
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();
 
-        int Size = 6; // Zmienna do testów, możesz zmienić na potrzebną wartość
-        string[,] nr = new string[100, 7];
-        string[,] nr2 = new string[100, 7];
-        string[,] nr3 = new string[100, 7];
-        int iter = 1;
+        int Size = 10; // Zmienna do testów, możesz zmienić na potrzebną wartość
+        int nr_size = 1;
+        for (int i = 0; i < Size - 1; i++)
+        {
+            for (int j = i + 1; j < Size; j++)
+            {
+                for (int k = i; k < Size; k++)
+                {
+                    nr_size++;
+                }
+            }
+        }
+        string[,] nr = new string[nr_size, 9];
+        string[,] nr3 = new string[nr_size, 8];
         int iter2 = 1;
-        //int iter3 = 1;
         int x = 0;
-        int x2 = 0;
         int y = 0;
 
 
@@ -68,63 +75,25 @@ class Program
                 if (MatrixU[i, i] != 0.0)
                 {
                     MatrixL[j, i] = MatrixU[j, i] / MatrixU[i, i]; // lji = aji / aii
-                    nr[x, y] = (iter).ToString();
-                    iter++;
-                    y++;
-                    nr[x, y] = (i).ToString();
-                    y++;
-                    nr[x, y] = (j).ToString();
-                    y++;
-                    nr[x, y] = (i).ToString();
-                    y++;
-                    nr[x, y] = (j).ToString() + "," + (i).ToString();
-                    y++;
-                    nr[x, y] = (j).ToString() + "," + (i).ToString();
-                    y++;
-                    nr[x, y] = (i).ToString() + "," + (i).ToString();
-                    x++;
-                    y = 0;
                 }
                 else
                 {
                     MatrixL[j, i] = 0.0;
-                    nr[x, y] = (iter).ToString();
-                    iter++;
-                    y++;
-                    nr[x, y] = (i).ToString();
-                    y++;
-                    nr[x, y] = (j).ToString();
-                    y++;
-                    nr[x, y] = (i).ToString();
-                    y++;
-                    nr[x, y] = (j).ToString() + "," + (i).ToString();
-                    y++;
-                    nr[x, y] = (j).ToString() + "," + (i).ToString();
-                    y++;
-                    nr[x, y] = (i).ToString() + "," + (i).ToString();
-                    x++;
-                    y = 0;
                 }
 
                 for (int k = i; k < Size; k++)
                 {
                     MatrixU[j, k] -= MatrixL[j, i] * MatrixU[i, k]; // ajk = ajk - lji * aik
-                    nr2[x2, y] = (iter2).ToString();
+                    nr[x, 1] = (iter2).ToString();
                     iter2++;
-                    y++;
-                    nr2[x2, y] = (i).ToString();
-                    y++;
-                    nr2[x2, y] = (j).ToString();
-                    y++;
-                    nr2[x2, y] = (k).ToString();
-                    y++;
-                    nr2[x2, y] = (j).ToString() + "," + (k).ToString();
-                    y++;
-                    nr2[x2, y] = (j).ToString() + "," + (i).ToString();
-                    y++;
-                    nr2[x2, y] = (i).ToString() + "," + (k).ToString();
-                    x2++;
-                    y = 0;
+                    nr[x, 2] = (i).ToString();
+                    nr[x, 3] = (j).ToString();
+                    nr[x, 4] = (k).ToString();
+                    nr[x, 5] = (j).ToString() + "," + (k).ToString();
+                    nr[x, 6] = (j).ToString() + "," + (i).ToString();
+                    nr[x, 7] = (i).ToString() + "," + (k).ToString();
+                    nr[x, 8] = (i).ToString() + "," + (i).ToString();
+                    x++;
                 }
             }
         }
@@ -166,14 +135,9 @@ class Program
             Console.WriteLine();
         }
 
-
-
-        x = 0;
-        x2 = 0;
-        y = 0;
-        for (x = 0; x != 100; x++)
+        for (x = 0; x != nr_size; x++)
         {
-            for (y = 0; y != 7; y++)
+            for (y = 0; y != 9; y++)
             {
                 if (nr[x, y] == null)
                 {
@@ -186,25 +150,99 @@ class Program
                 }
             }
             Console.WriteLine("");
-
         }
-        y = 0;
-        Console.WriteLine("-----------------------------------");
-        for (x2 = 0; x2 != 100; x2++)
+        for (int x2 = 0; x2 != nr_size; x2++)//kopiowanie i,j,k
         {
-            for (y = 0; y != 7; y++)
+            nr3[x2, 1] = nr[x2, 1];
+            nr3[x2, 2] = nr[x2, 2];
+            nr3[x2, 3] = nr[x2, 3];
+            nr3[x2, 4] = nr[x2, 4];
+        }
+        Console.WriteLine("-------------------------------------");
+
+        for (int x2 = 0; x2 != nr_size; x2++)
+        {
+
+            for (x = x2 + 1; x != nr_size; x++)
             {
-                if (nr2[x2, y] == null)
+                if (nr[x2, 5] == nr[x, 5])
                 {
-                    nr2[x2, y] = "";
+                    nr3[x2, 7] = nr[x, 2] + "," + nr[x, 3] + "," + nr[x, 4] + "P";
+                    break;
                 }
                 else
                 {
-                    Console.Write(nr2[x2, y]);
+                    nr3[x2, 7] = "BRAK ";
+                }
+            }
+        }
+        for (int x2 = 0; x2 != nr_size; x2++)
+        {
+
+            for (x = x2 + 1; x != nr_size; x++)
+            {
+                if (nr[x2, 5] == nr[x, 7] && (nr3[x2, 7] == "BRAK "))
+                {
+                    nr3[x2, 7] = nr[x, 2] + "," + nr[x, 3] + "," + nr[x, 4] + "U";
+                    break;
+                }
+
+            }
+        }
+
+        for (int x2 = 0; x2 != nr_size; x2++)
+        {
+
+            for (x = x2 + 1; x != nr_size; x++)
+            {
+                if (nr[x2,6] == nr[x,6])
+                {
+                    nr3[x2, 5] = nr[x,2] + "," + nr[x, 3] + "," + nr[x, 4];
+                    break;
+                }
+                else
+                {
+                    nr3[x2, 5] = "BRAK ";
+                }
+            }
+        }
+
+        for (int x2 = 0; x2 != nr_size; x2++)
+        {
+
+            for (x = x2 + 1; x != nr_size; x++)
+            {
+                if (nr[x2, 7] == nr[x, 7])
+                {
+                    nr3[x2, 6] = nr[x, 2] + "," + nr[x, 3] + "," + nr[x, 4];
+                    break;
+                }
+                else
+                {
+                    nr3[x2, 6] = "BRAK ";
+                }
+            }
+        }
+
+
+
+        for (x = 0; x != nr_size; x++)//wypisywanie tabeli nr3
+        {
+            for (y = 0; y != 8; y++)
+            {
+                if (nr3[x, y] == null)
+                {
+                    nr3[x, y] = "";
+                }
+                else
+                {
+                    Console.Write(nr3[x, y]);
                     Console.Write("|");
                 }
             }
             Console.WriteLine("");
+
+
         }
     }
 }
